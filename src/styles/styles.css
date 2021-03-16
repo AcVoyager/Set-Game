@@ -1,0 +1,36 @@
+/* 
+Have to add the following style, else weird blank space shown 
+Ref: https://stackoverflow.com/a/4617920/9045814
+*/
+
+html, body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+/* page view styles */
+
+.div-app {
+    min-height: 100vh;
+    /* background-color: #f8f8b8; */
+}
+/* 
+.main-heading {
+    height: 10vh;
+}
+
+.main-heading > p {
+    color: black;
+    font-size: 2em;
+    font-family: 'Dancing Script', cursive;
+    margin: auto;
+}
+
+.main-content {
+  background-color:rgb(255, 255, 255, 0.5);
+} 
+*/

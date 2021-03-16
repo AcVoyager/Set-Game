@@ -1,0 +1,13 @@
+/* Highlight current position in Navbar */
+.nav-item-current > .nav-link {
+    color: black !important;
+}
+
+.nav-item-current {
+    background-color: white;
+}
+
+#copyright-text {
+    color: white;
+    margin-left: 0;
+}

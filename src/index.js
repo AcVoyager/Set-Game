@@ -1,12 +1,22 @@
+import bootstrap from 'bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/portfolio.css'; // consistent with assignment1
+import './styles/styles.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
+import './styles/styles.css';
+import App from './views/App';
 import reportWebVitals from './reportWebVitals';
+
+import { Provider } from 'react-redux';
+import { store } from './redux/store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
