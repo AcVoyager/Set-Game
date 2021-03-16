@@ -1,3 +1,6 @@
-export const APP_STATES = {
+export const STATES = {
+  WELCOME: "WELCOME",
+  GAME: "GAME",
+  RULE: "RULE",
 
 };

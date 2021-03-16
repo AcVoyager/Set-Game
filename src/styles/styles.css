@@ -18,19 +18,16 @@ html, body
     min-height: 100vh;
     /* background-color: #f8f8b8; */
 }
-/* 
-.main-heading {
-    height: 10vh;
-}
-
-.main-heading > p {
-    color: black;
-    font-size: 2em;
-    font-family: 'Dancing Script', cursive;
-    margin: auto;
-}
 
 .main-content {
-  background-color:rgb(255, 255, 255, 0.5);
+  /* background-color:rgb(0, 0, 0, 0.8); */
 } 
-*/
+
+/* .welcome-page {
+    margin: auto;
+} */
+
+.welcome-page {
+    color: white;
+}
+

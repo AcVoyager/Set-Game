@@ -9,7 +9,7 @@ function PageMain(props) {
 	return (
 		<main className="d-flex flex-column page-main flex-grow-1">
 
-			<PageMainHeading />
+			{/* <PageMainHeading /> */}
 
 			<PageMainContent />
 
