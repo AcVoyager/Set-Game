@@ -23,14 +23,6 @@ export const ACTIONS = {
     return newAct;
   },
 
-  initialize: (cardDeck, shownCardNum) => {
-    let newAct = {...simple_action};
-    newAct.type = ACTION_TYPES.INITIALIZATION;
-    newAct.payload.cardDeck = cardDeck;
-    newAct.payload.shownCardNum = shownCardNum;
-    return newAct;
-  },
-
   clickCard: (cindex, cid) => {
     let newAct = {...simple_action};
     newAct.type = ACTION_TYPES.CLICK_CARD;
