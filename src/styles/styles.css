@@ -32,7 +32,7 @@ html, body
 }
 
 .set-card {
-    /* border: 3px solid green; */
+    /* border: 3px solid #00B74A; */
     transition: all 0.2s ease-in-out;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }

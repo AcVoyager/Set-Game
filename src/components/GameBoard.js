@@ -39,9 +39,8 @@ const drawTilExisted = (shownCardNum) => {
 }
 
 const getCardsOnBoard = (onBoardCards) => {
-  let cardArr = onBoardCards.slice();
-  return cardArr.map((value, key) => {
-   return <SetCard key={key} cindex={key} cid={value}/> 
+  return onBoardCards.slice().map((value, key) => {
+   return <SetCard key={key} cindex={key} cid={value.cid} border={value.border}/> 
   })
 }
 

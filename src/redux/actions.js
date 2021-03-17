@@ -29,6 +29,14 @@ export const ACTIONS = {
     newAct.payload.cardDeck = cardDeck;
     newAct.payload.shownCardNum = shownCardNum;
     return newAct;
+  },
+
+  clickCard: (cindex, cid) => {
+    let newAct = {...simple_action};
+    newAct.type = ACTION_TYPES.CLICK_CARD;
+    newAct.payload.cindex = cindex;
+    newAct.payload.cid = cid;
+    return newAct;
   }
 
 };
