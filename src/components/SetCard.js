@@ -9,10 +9,10 @@ function SetCard(props) {
   const imgPath = `/imgs/${props.cid}.png`;
 
   return (
-    <div className="set-card col-4">
-
-      <img src={imgPath} alt={"Card "+props.cid} id={"c"+props.cid}/>
-      
+    <div className="col-3 d-flex justify-content-center aligh-item-center my-3">
+      <div className="set-card">
+        <img src={imgPath} alt={"Card "+props.cid} id={"c"+props.cid}/>
+      </div>
     </div>
   )
 }
