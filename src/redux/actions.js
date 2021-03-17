@@ -16,4 +16,11 @@ export const ACTIONS = {
     return newAct;
   },
 
+  setDifficulty: (difficulty) => {
+    let newAct = {...simple_action};
+    newAct.type = ACTION_TYPES.SET_DIFF;
+    newAct.payload.difficulty = difficulty;
+    return newAct;
+  }
+
 };
