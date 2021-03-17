@@ -2,7 +2,7 @@ import React from 'react'
 
 function Rule(props) {
   return (
-    <div>
+    <div className="container-fluid">
 
       Rule
       

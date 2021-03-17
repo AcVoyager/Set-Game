@@ -26,11 +26,7 @@ function PageMainContent(props) {
 
   const appState = useSelector(state => state.appState);
 
-  return (
-    <div className="main-content bg-dark container-fluid d-flex flex-grow-1 align-items-center justify-content-center">
-      {getPage(appState)}
-    </div>
-  );
+  return getPage(appState);
       
 
 }

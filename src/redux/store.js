@@ -11,7 +11,8 @@ const rootReducer = (state=INITIAL_STATE, action) => {
 
   let newState = {...state};
   switch (action.type) {
-    case null:
+    case ACTION_TYPES.CHANGE_STATE:
+      newState.appState = action.payload.nextState;
       break;
     default:
       return state;

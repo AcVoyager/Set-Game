@@ -1,3 +1,4 @@
 export const ACTION_TYPES = {
+  CHANGE_STATE: "CHANGE_STATE",
 
 };
