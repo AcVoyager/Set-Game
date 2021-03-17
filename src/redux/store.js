@@ -6,6 +6,11 @@ const INITIAL_STATE = {
   appState: STATES.WELCOME,
   difficulty: 1,
 
+  cardDeck: [],
+  onBoardCards: [],
+  inDeckCards: [],
+  shownCardNum: 0,
+  selected_cards: [],
 };
 
 const rootReducer = (state=INITIAL_STATE, action) => {
@@ -17,6 +22,12 @@ const rootReducer = (state=INITIAL_STATE, action) => {
       break;
     case ACTION_TYPES.SET_DIFF:
       newState.difficulty = action.payload.difficulty;
+      break;
+    case ACTION_TYPES.INITIALIZATION:
+      newState.cardDeck = action.payload.cardDeck;
+      newState.shownCardNum = action.payload.shownCardNum;
+      newState.onBoardCards = newState.cardDeck.slice(0, newState.shownCardNum);
+      newState.inDeckCards = newState.cardDeck.slice(newState.shownCardNum);
       break;
     default:
       return state;

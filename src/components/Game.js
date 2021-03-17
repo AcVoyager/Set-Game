@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 
+import GameBoard from './GameBoard'
+
 function Game(props) {
 
   const difficulty = useSelector(state => state.difficulty);
@@ -40,9 +42,7 @@ function Game(props) {
 
         <div className="col-9">
 
-          <div className="game-board">
-            {/* TODO */}
-          </div>
+          <GameBoard />
 
         </div>
 

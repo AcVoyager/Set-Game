@@ -21,6 +21,14 @@ export const ACTIONS = {
     newAct.type = ACTION_TYPES.SET_DIFF;
     newAct.payload.difficulty = difficulty;
     return newAct;
+  },
+
+  initialize: (cardDeck, shownCardNum) => {
+    let newAct = {...simple_action};
+    newAct.type = ACTION_TYPES.INITIALIZATION;
+    newAct.payload.cardDeck = cardDeck;
+    newAct.payload.shownCardNum = shownCardNum;
+    return newAct;
   }
 
 };
