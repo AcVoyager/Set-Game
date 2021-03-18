@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { ACTIONS } from '../redux/actions';
 import { STATES } from '../redux/stateConstants';
 
 import GameBoard from './GameBoard';
 import StatusBar from './StatusBar';
+import { findSet } from '../redux/store'
 
 const getDiff = (diff) => {
   if(diff == 1) // use == instead of === on purpose here
@@ -24,6 +25,8 @@ function Game(props) {
   const selected_cards = useSelector(state => state.selected_cards);
   const dispatch = useDispatch();
 
+  const [ifHint, setIfHint] = useState(false);
+
   return (
     <div className="container-fluid d-flex flex-grow-1">
 
@@ -34,15 +37,19 @@ function Game(props) {
           </div>
           
           <div className="buttons">
-            <div className="my-3" onClick={() => dispatch(ACTIONS.changeState(STATES.GAME))}>
-              <button type="button" class="btn btn-primary">Reset</button>
+            <div className="my-3">
+              <button type="button" class="btn btn-primary" onClick={() => dispatch(ACTIONS.changeState(STATES.GAME))}>Reset</button>
             </div>
-            <div className="my-3" onClick={() => dispatch(ACTIONS.drawCards())}>
-              <button type="button" class="btn btn-success">Draw 3 cards</button>
+            <div className="my-3">
+              <button type="button" class="btn btn-success" onClick={() => dispatch(ACTIONS.drawCards())}>Draw 3 cards</button>
             </div>
-            {/* <div className="my-3" onClick={() => {}}>
-              <button type="button" class="btn btn-warning">Hint</button>
-            </div> */}
+            <div className="my-3"> 
+              <button type="button" class="btn btn-warning" onClick={() => setIfHint(!ifHint)}>Hint</button>
+              {ifHint?
+                <p className="mt-2 ms-1">{findSet(onBoardCards.map(value => value.cid)) ? 
+                    "There is at least one set on board" : "No set on board"}</p> : null
+              }
+            </div>
           </div>
 
           <div className="" style={{width: '80%'}}>

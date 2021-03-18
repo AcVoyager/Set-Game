@@ -60,7 +60,7 @@ const drawTilExisted = (cardDeck, shownCardNum) => {
 
 const ifSetExists = (cards) => findSet(cards) != null
 
-const findSet = (cards) => {
+export const findSet = (cards) => {
   let combinations = getCombinations(cards, 3);
   // console.log(combinations.length, combinations.slice(0, 5));
   for(let comb of combinations){
