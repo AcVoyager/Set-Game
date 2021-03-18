@@ -3,5 +3,5 @@ export const ACTION_TYPES = {
   SET_DIFF: "SET_DIFF",
   CLICK_CARD: "CLICK_CARD",
   DISCARD: "DISCARD",
-  
+  DRAW_CARDS: "DRAW_CARDS",
 };

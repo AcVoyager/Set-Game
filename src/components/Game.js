@@ -1,5 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { ACTIONS } from '../redux/actions';
+import { STATES } from '../redux/stateConstants';
 
 import GameBoard from './GameBoard';
 import StatusBar from './StatusBar';
@@ -20,6 +22,7 @@ function Game(props) {
   const inDeckCards = useSelector(state => state.inDeckCards);
   const cardDeck = useSelector(state => state.cardDeck);
   const selected_cards = useSelector(state => state.selected_cards);
+  const dispatch = useDispatch();
 
   return (
     <div className="container-fluid d-flex flex-grow-1">
@@ -31,12 +34,15 @@ function Game(props) {
           </div>
           
           <div className="buttons">
-            <div className="my-3">
+            <div className="my-3" onClick={() => dispatch(ACTIONS.changeState(STATES.GAME))}>
               <button type="button" class="btn btn-primary">Reset</button>
             </div>
-            <div className="my-3">
+            <div className="my-3" onClick={() => dispatch(ACTIONS.drawCards())}>
               <button type="button" class="btn btn-success">Draw 3 cards</button>
             </div>
+            {/* <div className="my-3" onClick={() => {}}>
+              <button type="button" class="btn btn-warning">Hint</button>
+            </div> */}
           </div>
 
           <div className="" style={{width: '80%'}}>

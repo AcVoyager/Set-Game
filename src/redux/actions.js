@@ -35,6 +35,12 @@ export const ACTIONS = {
     let newAct = {...simple_action};
     newAct.type = ACTION_TYPES.DISCARD;
     return newAct;
+  },
+
+  drawCards: () => {
+    let newAct = {...simple_action};
+    newAct.type = ACTION_TYPES.DRAW_CARDS;
+    return newAct;
   }
 
 };

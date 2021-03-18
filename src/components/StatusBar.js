@@ -8,10 +8,10 @@ const posfix = {
 
 const getBarText = (isSet, arrLength) => {
   if(arrLength < 3) {
-    return `Please select the ${arrLength+1} ${posfix[arrLength+1]} card.`;
+    return `Please select your ${arrLength+1} ${posfix[arrLength+1]} card.`;
   }
   else if(isSet) {
-    return "Congratulation! Please click the button to continue.";
+    return "You find a set! Please click the button to continue.";
   }
   else{
     return "Sorry, it's not a set.";

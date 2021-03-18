@@ -61,11 +61,14 @@ const ifSetExists = (cards) => findSet(cards) != null
 
 const findSet = (cards) => {
   let combinations = getCombinations(cards, 3);
-  console.log(combinations.length, combinations.slice(0, 5));
+  // console.log(combinations.length, combinations.slice(0, 5));
   for(let comb of combinations){
-    if(checkIfSet(comb))
+    if(checkIfSet(comb)){
+      console.log(comb);
       return comb;
+    }   
   }
+  console.log("No set found");
   return null;
 }
 
@@ -202,13 +205,19 @@ const rootReducer = (state=INITIAL_STATE, action) => {
       });
       if(inDeckCards.length >= 3){
         onBoardCards = onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
-        while(newState.difficulty == 2 && inDeckCards.length >= 3 && !ifSetExists(onBoardCards)){
+        while(newState.difficulty == 2 && inDeckCards.length >= 3 && !ifSetExists(onBoardCards.map(value => value.cid))){
           onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
         }
         // console.log(onBoardCards);
       }
       newState.isSet = false;
       newState.selected_cards = [];
+      newState.onBoardCards = onBoardCards;
+      newState.inDeckCards = inDeckCards;
+      break;
+    case ACTION_TYPES.DRAW_CARDS:
+      if(inDeckCards.length >= 3)  
+        onBoardCards = onBoardCards.concat(inDeckCards.splice(0, 3).map(value => ({cid: value, border: null})));
       newState.onBoardCards = onBoardCards;
       newState.inDeckCards = inDeckCards;
       break;
