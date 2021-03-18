@@ -23,7 +23,7 @@ function SetCard(props) {
   const dispatch = useDispatch();
 
   return (
-    <div className="col-3 d-flex justify-content-center aligh-item-center my-3">
+    <div className="col-sm-6 col-lg-4 col-xl-3 d-flex justify-content-center aligh-item-center my-3">
       <div className="set-card" style={{border: getBorder(props.border)}} 
         onClick={() => dispatch(ACTIONS.clickCard(props.cindex, props.cid))}>
         <img src={imgPath} alt={"Card "+props.cid} id={"c"+props.cid}/>

@@ -11,6 +11,8 @@ const INITIAL_STATE = {
   inDeckCards: [],
   shownCardNum: 0,
   selected_cards: [], // [cindex,]
+
+  isSet: false,
 };
 
 //ref: https://stackoverflow.com/a/2450976/9045814
@@ -47,6 +49,11 @@ const drawTilExisted = (shownCardNum) => {
   return shownCardNum;
 }
 
+const ifSetExists = (cards) => {
+  //TODO
+  return true;
+}
+
 const getFeature = (cid) => {
   let features = [];
   let divisors = [81, 27, 9, 3];
@@ -64,12 +71,12 @@ const getFeature = (cid) => {
 }
 
 const checkIfSet = ([c1, c2, c3]) => {
-  console.log(c1, c2, c3);
+  // console.log(c1, c2, c3);
   const fc1 = getFeature(c1), fc2 = getFeature(c2), fc3 = getFeature(c3);
-  console.log(fc1, fc2, fc3);
+  // console.log(fc1, fc2, fc3);
   for(let i = 0; i < fc1.length; i++){
     let [f1, f2, f3] = [fc1[i], fc2[i], fc3[i]];
-    console.log(f1, f2, f3);
+    // console.log(f1, f2, f3);
     if(!((f1 === f2 && f1 === f3 && f2 === f3) || (f1 !== f2 && f1 !== f3 && f2 !== f3)))
       return false;
   }
@@ -79,6 +86,9 @@ const checkIfSet = ([c1, c2, c3]) => {
 const rootReducer = (state=INITIAL_STATE, action) => {
 
   let newState = {...state};
+  let selected_cards = newState.selected_cards.slice();
+  let onBoardCards = newState.onBoardCards.slice();
+  let inDeckCards = newState.inDeckCards.slice();
   switch (action.type) {
     case ACTION_TYPES.CHANGE_STATE:
       newState.appState = action.payload.nextState;
@@ -105,11 +115,7 @@ const rootReducer = (state=INITIAL_STATE, action) => {
     case ACTION_TYPES.CLICK_CARD:
       const cindex = action.payload.cindex;
       const cid = action.payload.cid;
-      const selected_cards = newState.selected_cards.slice();
-      const onBoardCards = newState.onBoardCards.slice();
-
       const idx = selected_cards.indexOf(cindex);
-
       // unselect
       if(idx !== -1){
         selected_cards.splice(idx, 1);
@@ -117,6 +123,7 @@ const rootReducer = (state=INITIAL_STATE, action) => {
         selected_cards.map((value) => {
           onBoardCards[value].border = STATES.BORDER_SELECTED;
         });
+        newState.isSet = false;
       }
       //select
       else {
@@ -125,20 +132,49 @@ const rootReducer = (state=INITIAL_STATE, action) => {
           selected_cards.map((value) => {
             onBoardCards[value].border = STATES.BORDER_SELECTED;
           });
+          newState.isSet = false;
           // onBoardCards[cindex].border = STATES.BORDER_SELECTED;
         }
         else if(selected_cards.length === 2) {
           selected_cards.push(cindex);
-          const border = checkIfSet(selected_cards.map((value) => onBoardCards[value].cid)) ? STATES.BORDER_SET : STATES.BORDER_NOTSET;
+          const isSet = checkIfSet(selected_cards.map((value) => onBoardCards[value].cid));
+          newState.isSet = isSet;
+          const border = isSet ? STATES.BORDER_SET : STATES.BORDER_NOTSET;
           selected_cards.map((value) => {
             onBoardCards[value].border = border;
           });
+        }
+        else { //click other cards when there're already 3 cards selected
+          if(!newState.isSet) {
+            selected_cards.map((value) => {
+              onBoardCards[value].border = null;
+            })
+            selected_cards = [cindex];
+            onBoardCards[cindex].border = STATES.BORDER_SELECTED;
+          }
         }
         
       }
       // console.log(selected_cards);
       newState.selected_cards = selected_cards;
       newState.onBoardCards = onBoardCards;
+      break;
+    case ACTION_TYPES.DISCARD:
+      // console.log(onBoardCards);
+      onBoardCards = onBoardCards.filter((value, index) => {
+        return selected_cards.indexOf(index) === -1;
+      });
+      if(inDeckCards.length >= 3){
+        onBoardCards = onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
+        while(newState.difficulty == 2 && inDeckCards.length >= 3 && !ifSetExists(onBoardCards)){
+          onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
+        }
+        // console.log(onBoardCards);
+      }
+      newState.isSet = false;
+      newState.selected_cards = [];
+      newState.onBoardCards = onBoardCards;
+      newState.inDeckCards = inDeckCards;
       break;
     default:
       return state;

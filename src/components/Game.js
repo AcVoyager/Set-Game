@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 
-import GameBoard from './GameBoard'
+import GameBoard from './GameBoard';
+import StatusBar from './StatusBar';
 
 function Game(props) {
 
@@ -56,7 +57,9 @@ function Game(props) {
           </div>
         </div>
 
-        <div className="col-9">
+        <div className="col-9 d-flex flex-column">
+
+          <StatusBar />
 
           <GameBoard />
 

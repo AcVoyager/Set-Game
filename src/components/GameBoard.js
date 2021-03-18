@@ -5,8 +5,8 @@ import { ACTIONS } from '../redux/actions';
 import SetCard from './SetCard';
 
 const getCardsOnBoard = (onBoardCards) => {
-  return onBoardCards.slice().map((value, key) => {
-   return <SetCard key={key} cindex={key} cid={value.cid} border={value.border}/> 
+  return onBoardCards.slice().map((value, index) => {
+   return <SetCard key={value.cid} cindex={index} cid={value.cid} border={value.border}/> 
   })
 }
 

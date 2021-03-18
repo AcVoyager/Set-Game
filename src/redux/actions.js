@@ -29,6 +29,12 @@ export const ACTIONS = {
     newAct.payload.cindex = cindex;
     newAct.payload.cid = cid;
     return newAct;
+  },
+
+  discard: () => {
+    let newAct = {...simple_action};
+    newAct.type = ACTION_TYPES.DISCARD;
+    return newAct;
   }
 
 };
