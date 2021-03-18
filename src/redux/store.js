@@ -13,6 +13,7 @@ const INITIAL_STATE = {
   selected_cards: [], // [cindex,]
 
   isSet: false,
+  isGameOver: false,
 };
 
 //ref: https://stackoverflow.com/a/2450976/9045814
@@ -199,16 +200,19 @@ const rootReducer = (state=INITIAL_STATE, action) => {
       newState.onBoardCards = onBoardCards;
       break;
     case ACTION_TYPES.DISCARD:
-      // console.log(onBoardCards);
       onBoardCards = onBoardCards.filter((value, index) => {
         return selected_cards.indexOf(index) === -1;
       });
-      if(inDeckCards.length >= 3){
-        onBoardCards = onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
-        while(newState.difficulty == 2 && inDeckCards.length >= 3 && !ifSetExists(onBoardCards.map(value => value.cid))){
-          onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
-        }
-        // console.log(onBoardCards);
+
+      if(newState.difficulty == 2)
+        while(inDeckCards.length >= 3 && ((onBoardCards.length < 12) || !ifSetExists(onBoardCards.map(value => value.cid))))
+          onBoardCards = onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
+      else 
+        while(inDeckCards.length >= 3 && onBoardCards.length < 12)
+          onBoardCards = onBoardCards.concat(inDeckCards.splice(0, 3).map((value) => ({cid: value, border: null})));
+      
+      if(onBoardCards.length === 0 && inDeckCards.length === 0) { // game over
+        newState.isGameOver = true;
       }
       newState.isSet = false;
       newState.selected_cards = [];
