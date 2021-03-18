@@ -44,14 +44,50 @@ const generateCardDeck = (num) => {
   return newArr;
 }
 
-const drawTilExisted = (shownCardNum) => {
-  // TODO
+const drawTilExisted = (cardDeck, shownCardNum) => {
+  
+  while(shownCardNum < cardDeck.length) {
+    let cards = cardDeck.slice(0, shownCardNum);
+    if(!ifSetExists(cards))
+      shownCardNum += 3;
+    else
+      return shownCardNum;
+  }
+
   return shownCardNum;
 }
 
-const ifSetExists = (cards) => {
-  //TODO
-  return true;
+const ifSetExists = (cards) => findSet(cards) != null
+
+const findSet = (cards) => {
+  let combinations = getCombinations(cards, 3);
+  console.log(combinations.length, combinations.slice(0, 5));
+  for(let comb of combinations){
+    if(checkIfSet(comb))
+      return comb;
+  }
+  return null;
+}
+
+//ref: https://github.com/N-ZOO/everycode/issues/8#issuecomment-487536142
+function getCombinations(arr, order) {
+  if (order === 1) return arr;
+
+  let result = [], length = arr.length;
+
+  for (let i = 0; i < length; i++) {
+      const p = arr[i];
+      const remaining = arr.slice(i + 1);
+
+      if (remaining.length < order - 1) break;
+
+      result = [
+          ...result,
+          ...getCombinations(remaining, order - 1).map(e => [p].concat(e))
+      ];
+  }
+
+  return result;
 }
 
 const getFeature = (cid) => {
@@ -100,7 +136,7 @@ const rootReducer = (state=INITIAL_STATE, action) => {
         else
           cardDeck = generateCardDeck(STATES.NOT_EASY_CARD_NUM);
         if(newState.difficulty == 2)
-          shownCardNum = drawTilExisted(shownCardNum);
+          shownCardNum = drawTilExisted(cardDeck, shownCardNum);
         newState.cardDeck = cardDeck;
         newState.shownCardNum = shownCardNum;
         newState.onBoardCards = newState.cardDeck.slice(0, newState.shownCardNum).map(
