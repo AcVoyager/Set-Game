@@ -47,8 +47,32 @@ const drawTilExisted = (shownCardNum) => {
   return shownCardNum;
 }
 
-const checkIfSet = (c1, c2, c3) => {
-  //  TODO
+const getFeature = (cid) => {
+  let features = [];
+  let divisors = [81, 27, 9, 3];
+  for(let div of divisors) {
+    let temp = cid % div;
+    let flag1 = div / 3, flag2 = flag1 * 2;
+    if(temp > 0 && temp <= flag1)
+      features.push(1);
+    else if(temp > flag1 && temp <= flag2)
+      features.push(2);
+    else
+      features.push(3);
+  }
+  return features;
+}
+
+const checkIfSet = ([c1, c2, c3]) => {
+  console.log(c1, c2, c3);
+  const fc1 = getFeature(c1), fc2 = getFeature(c2), fc3 = getFeature(c3);
+  console.log(fc1, fc2, fc3);
+  for(let i = 0; i < fc1.length; i++){
+    let [f1, f2, f3] = [fc1[i], fc2[i], fc3[i]];
+    console.log(f1, f2, f3);
+    if(!((f1 === f2 && f1 === f3 && f2 === f3) || (f1 !== f2 && f1 !== f3 && f2 !== f3)))
+      return false;
+  }
   return true;
 }
 
@@ -105,7 +129,7 @@ const rootReducer = (state=INITIAL_STATE, action) => {
         }
         else if(selected_cards.length === 2) {
           selected_cards.push(cindex);
-          const border = checkIfSet(selected_cards[0], selected_cards[1], selected_cards[2]) ? STATES.BORDER_SET : STATES.BORDER_NOTSET;
+          const border = checkIfSet(selected_cards.map((value) => onBoardCards[value].cid)) ? STATES.BORDER_SET : STATES.BORDER_NOTSET;
           selected_cards.map((value) => {
             onBoardCards[value].border = border;
           });
