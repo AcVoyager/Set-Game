@@ -22,6 +22,7 @@ function PageHeaderNav(props) {
 	}
 
 	return (
+		// ref: https://getbootstrap.com/docs/5.0/components/navbar/
 		<header>
 			<nav className="navbar navbar-dark navbar-expand-lg bg-dark">
         <div className="container-fluid">
