@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ACTIONS } from '../redux/actions';
 import { STATES } from '../redux/stateConstants'
@@ -7,6 +7,7 @@ import { STATES } from '../redux/stateConstants'
 function Rule(props) {
 
   const dispatch = useDispatch();
+  const lastAppState = useSelector(state => state.lastAppState);
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center flex-grow-1 rule-container">
@@ -28,8 +29,8 @@ function Rule(props) {
               <small className="text-muted">Reference: Wikipedia</small>
             </p>
             <div className="text-end">
-              <button type="button" class="btn btn-outline-primary btn-lg"
-                onClick={() => dispatch(ACTIONS.changeState(STATES.WELCOME))}>
+              <button type="button" className="btn btn-outline-primary btn-lg"
+                onClick={() => dispatch(ACTIONS.changeState(lastAppState))}>
                 Back
               </button>
             </div>

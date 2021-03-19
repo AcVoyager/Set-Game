@@ -40,3 +40,13 @@ html, body
 .set-card:hover {
     transform: scale(1.2);
 }
+/* 
+.navbar {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+}
+*/
+
+/* .navbar-nav {
+    flex-direction: row;
+} */

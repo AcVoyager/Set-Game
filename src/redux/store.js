@@ -3,6 +3,7 @@ import { ACTION_TYPES } from './actionConstants'
 import { STATES } from './stateConstants'
 
 const INITIAL_STATE = {
+  lastAppState: STATES.WELCOME,
   appState: STATES.WELCOME,
   difficulty: 1,
 
@@ -131,8 +132,9 @@ const rootReducer = (state=INITIAL_STATE, action) => {
   let inDeckCards = newState.inDeckCards.slice();
   switch (action.type) {
     case ACTION_TYPES.CHANGE_STATE:
+      newState.lastAppState = newState.appState;
       newState.appState = action.payload.nextState;
-      if(newState.appState === STATES.GAME){
+      if(newState.appState === STATES.GAME && newState.lastAppState !== STATES.RULE){
         let shownCardNum = STATES.START_CARDS_NUM;
         let cardDeck = [];
         if(newState.difficulty == 1)
