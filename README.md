@@ -10,6 +10,8 @@ Please refer to [Set (card game)](https://en.wikipedia.org/wiki/Set_(card_game))
 
 ## How to run?
 
+run `npm install` to download the dependencies.
+
 run `npm start`
 
 Runs the app in the development mode.\
